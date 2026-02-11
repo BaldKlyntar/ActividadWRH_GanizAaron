@@ -10,10 +10,19 @@ class WebRequestHandler(BaseHTTPRequestHandler):
         return dict(parse_qsl(self.url().query))
 
     def do_GET(self):
+        if self.path == "/":
+            filename = "home.html"
+        else:
+            filename = "notFound.html"
+        # Se abre el archivo utilizando open
+        #el archivo es leido en su formato binario (rb)
+        with open(filename, "rb") as file:
+            content = file.read()
         self.send_response(200)
         self.send_header("Content-Type", "text/html")
         self.end_headers()
-        self.wfile.write(self.get_response().encode("utf-8"))
+        self.wfile.write(content)
+        #self.wfile.write(self.get_response().encode("utf-8"))
 
     #En la funcion get_response, accedo al diccionario creado por parse_qsl a partir
     # de la ruta url y accedo a la key autor para extraer el nombre
@@ -33,5 +42,5 @@ if __name__ == "__main__":
     # Almaceno en la variable PORT el puerto al que quiero acceder
     PORT = 8000 # Asigno el puerto 8000
     print(f"""Corriendo en el puerto: {PORT}""") #Se muestra la informacion del puerto
-    server = HTTPServer(("localhost", 8000), WebRequestHandler)
+    server = HTTPServer(("localhost", PORT), WebRequestHandler)
     server.serve_forever()
