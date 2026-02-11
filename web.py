@@ -15,8 +15,11 @@ class WebRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(self.get_response().encode("utf-8"))
 
+    #En la funcion get_response, accedo al diccionario creado por parse_qsl a partir
+    # de la ruta url y accedo a la key autor para extraer el nombre
     def get_response(self):
         return f"""
+    <h1>Proyecto: web-uno Autor: {self.query_data().get("autor")}</h1>
     <h1> Hola Web </h1>
     <p> URL Parse Result : {self.url()}         </p>
     <p> Path Original: {self.path}         </p>
