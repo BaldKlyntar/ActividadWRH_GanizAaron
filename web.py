@@ -27,5 +27,8 @@ class WebRequestHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     print("Starting server")
-    server = HTTPServer(("localhost", 8080), WebRequestHandler)
+    # Almaceno en la variable PORT el puerto al que quiero acceder
+    PORT = 8000 # Asigno el puerto 8000
+    print(f"""Corriendo en el puerto: {PORT}""") #Se muestra la informacion del puerto
+    server = HTTPServer(("localhost", 8000), WebRequestHandler)
     server.serve_forever()
