@@ -45,5 +45,5 @@ if __name__ == "__main__":
     # Almaceno en la variable PORT el puerto al que quiero acceder
     PORT = 8000 # Asigno el puerto 8000
     print(f"""Corriendo en el puerto: {PORT}""") #Se muestra la informacion del puerto
-    server = HTTPServer(("localhost", PORT), WebRequestHandler)
+    server = HTTPServer(("0.0.0.0", PORT), WebRequestHandler)
     server.serve_forever()
